@@ -7,7 +7,9 @@ class WheaterMap /* implements IWheaterApi */ {
         this.key = key || (process.env.WP_KEY || '');
     }
     call() {
-        return `https://api.openweathermap.org/data/2.5/forecast?lat=${this.lat}&lon=${this.lon}&units=metric&appid=${this.key}`;
+        const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${this.lat}&lon=${this.lon}&units=metric&appid=${this.key}`;
+        console.log(url);
+        return url;
     }
 }
 exports.default = WheaterMap;

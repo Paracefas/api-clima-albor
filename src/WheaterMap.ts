@@ -10,6 +10,9 @@ export default class WheaterMap /* implements IWheaterApi */ {
     }
 
     call() : string {
-        return `https://api.openweathermap.org/data/2.5/forecast?lat=${this.lat}&lon=${this.lon}&units=metric&appid=${this.key}`
+        const url: string = 
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${this.lat}&lon=${this.lon}&units=metric&appid=${this.key}`
+        console.log(url)
+        return url
     }
 } 

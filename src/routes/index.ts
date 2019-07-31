@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import getCurrent from '../getCurrent'
-import WheaterMap from '../WheaterMap'
+import WeatherMap from '../WeatherMap'
 
 const router = Router()
 
@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 
 router.get('/:lat&:lon&:key', async (req, res) => {
     const { lat, lon, key } = req.params
-    res.json(await getCurrent(key, new WheaterMap(lat, lon)))
+    res.json(await getCurrent(key, new WeatherMap(lat, lon)))
 })
 
 export default router

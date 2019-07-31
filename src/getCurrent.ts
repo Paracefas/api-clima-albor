@@ -1,7 +1,7 @@
-import IWheaterAPI from './IWheaterApi'
+import IWeatherAPI from './IWeatherApi'
 import validateKey from './validations'
 
-export default async function getCurrent(alborKey:number, api: IWheaterAPI) : Promise<any> {
+export default async function getCurrent(alborKey:number, api: IWeatherAPI) : Promise<any> {
     try {
         await validateKey(alborKey)
         return await api.call() 

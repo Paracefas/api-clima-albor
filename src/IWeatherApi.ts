@@ -1,4 +1,4 @@
-export default interface IWheaterAPI {
+export default interface IWeatherAPI {
     lat: number,
     lon: number,
     key?: string,

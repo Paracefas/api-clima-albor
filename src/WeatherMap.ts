@@ -1,7 +1,7 @@
 import fetch from 'cross-fetch'
 
 
-export default class WheaterMap /* implements IWheaterApi */ {
+export default class WeatherMap /* implements IWheaterApi */ {
     lat: number
     lon: number
     key: string

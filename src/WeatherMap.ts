@@ -29,7 +29,8 @@ export default class WeatherMap /* implements IWheaterApi */ {
         for(let element of listFromRes) {
             let p3h
             for(let i in element.rain) {
-                p3h = element.rain[i] || 0
+                p3h = element.rain[i] ? element.rain[i] : 0
+            
 
                 
             }

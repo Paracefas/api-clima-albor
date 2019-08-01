@@ -32,7 +32,7 @@ class WeatherMap /* implements IWheaterApi */ {
                 date: element.dt,
                 icon_url: element.weather[0].icon,
                 conditions: element.weather[0].description,
-                pop: p3h,
+                pop: p3h || 0,
                 avehumidity: element.main.humidity,
                 temp_min: element.main.temp_min,
                 temp_max: element.main.temp_max,

@@ -18,6 +18,10 @@ una clave random generada, siendo la única esta:
 
 ## Para uso interno:
 ### En caso de que se requiera hacer un cambio de API climática:
-#### Se debe implementar una clase que satisfaga a la siguiente especificación :
+Se debe implementar una clase que satisfaga a la siguiente especificación:
 
 ![Image not found](images/IWeatherApi.png)
+
+La función call debe retornar una respuesta JSON que tenga la siguiente esquema:
+
+![Image not found](images/JSONres.png)

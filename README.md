@@ -4,7 +4,7 @@ api para consumir servicios de terceros relacionados a datos climaticos
 ## Para uso público
 Se cuenta con dos rutas /api que redirecciona a una simple respuesta html 
 que nos indica que el servidor está corriendo. Luego para su uso específico 
-se debe hacer un get a - ![#1589F0]()`api/${lat}&${lon}&${alborApiKey}`. Dónde alborApiKey es 
+se debe hacer un get a - ![#1589F0](api/${lat}&${lon}&${alborApiKey})`api/${lat}&${lon}&${alborApiKey}`. Dónde alborApiKey es 
 una clave random generada, siendo la única esta: 
 >111111111111
 

@@ -19,3 +19,5 @@ una clave random generada, siendo la única esta:
 ## Para uso interno:
 ### En caso de que se requiera hacer un cambio de API climática:
 #### Se debe implementar una clase que satisfaga a la siguiente especificación :
+
+![Image not found](http://github.com/paracefas/api-clima-albor/tree/master/images/IWeatherApi.png)

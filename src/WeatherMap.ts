@@ -1,5 +1,5 @@
 import fetch from 'cross-fetch'
-
+import translations from './translations'
 
 export default class WeatherMap /* implements IWheaterApi */ {
     lat: number
@@ -19,12 +19,12 @@ export default class WeatherMap /* implements IWheaterApi */ {
         else if(regEn.test(lang || '')) this.lang = 'en'
         else this.lang = ''  
     }
-
     async call() : Promise<any> {
         const url: string = 
             `https://api.openweathermap.org/data/2.5/forecast?lat=${this.lat}&lon=${this.lon}&units=metric&appid=${this.key}&lang=${this.lang}`
         const result = await fetch(url)
-        const res  = await result.json()
+        const res = await result.json()
+        
         const finalRes = {
             forecast: {
                 simpleforecast: {
@@ -38,15 +38,15 @@ export default class WeatherMap /* implements IWheaterApi */ {
             let p3h
             for(let i in element.rain) {
                 p3h = element.rain[i]
-            
-
-                
             }
             finalRes.forecast.simpleforecast.forecastday.push(
                 {
                     date: element.dt,
                     icon_url: `http://openweathermap.org/img/w/${element.weather[0].icon}.png`,
-                    main_condition: element.weather[0].main,
+                    main_condition:
+                        this.lang !== 'en' ? 
+                        translations.get(element.weather[0].main)
+                            : element.weather[0].main,
                     conditions: element.weather[0].description,
                     pop: p3h || 0,
                     avehumidity: element.main.humidity,

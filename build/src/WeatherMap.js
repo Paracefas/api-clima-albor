@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const cross_fetch_1 = __importDefault(require("cross-fetch"));
+const translations_1 = __importDefault(require("./translations"));
 class WeatherMap /* implements IWheaterApi */ {
     constructor(lat, lon, lang) {
         this.lat = lat;
@@ -39,7 +40,9 @@ class WeatherMap /* implements IWheaterApi */ {
             finalRes.forecast.simpleforecast.forecastday.push({
                 date: element.dt,
                 icon_url: `http://openweathermap.org/img/w/${element.weather[0].icon}.png`,
-                main_condition: element.weather[0].main,
+                main_condition: this.lang !== 'en' ?
+                    translations_1.default.get(element.weather[0].main)
+                    : element.weather[0].main,
                 conditions: element.weather[0].description,
                 pop: p3h || 0,
                 avehumidity: element.main.humidity,

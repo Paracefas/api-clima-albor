@@ -5,13 +5,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const cross_fetch_1 = __importDefault(require("cross-fetch"));
 class WeatherMap /* implements IWheaterApi */ {
-    constructor(lat, lon, key) {
+    constructor(lat, lon, lang) {
         this.lat = lat;
         this.lon = lon;
-        this.key = key || (process.env.WP_KEY || '');
+        this.key = process.env.WP_KEY || '';
+        let regEs = /es-*/;
+        let regEn = /en-*/;
+        if (regEs.test(lang || ''))
+            this.lang = 'es';
+        else if (regEn.test(lang || ''))
+            this.lang = 'en';
+        else
+            this.lang = '';
     }
     async call() {
-        const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${this.lat}&lon=${this.lon}&units=metric&appid=${this.key}`;
+        const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${this.lat}&lon=${this.lon}&units=metric&appid=${this.key}&lang=${this.lang}`;
         const result = await cross_fetch_1.default(url);
         const res = await result.json();
         const finalRes = {
@@ -30,7 +38,8 @@ class WeatherMap /* implements IWheaterApi */ {
             }
             finalRes.forecast.simpleforecast.forecastday.push({
                 date: element.dt,
-                icon_url: element.weather[0].icon,
+                icon_url: `http://openweathermap.org/img/w/${element.weather[0].icon}.png`,
+                main_condition: element.weather[0].main,
                 conditions: element.weather[0].description,
                 pop: p3h || 0,
                 avehumidity: element.main.humidity,

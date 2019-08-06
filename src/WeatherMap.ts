@@ -5,16 +5,24 @@ export default class WeatherMap /* implements IWheaterApi */ {
     lat: number
     lon: number
     key: string
+    lang: string
     
-    constructor(lat: number, lon: number, key?: string) {
+    constructor(lat: number, lon: number, lang?: string) {
         this.lat = lat
         this.lon = lon
-        this.key = key || (process.env.WP_KEY || '')
+        this.key = process.env.WP_KEY || ''
+        
+        let regEs = /es-*/
+        let regEn = /en-*/
+
+        if(regEs.test(lang || '')) this.lang = 'es'  
+        else if(regEn.test(lang || '')) this.lang = 'en'
+        else this.lang = ''  
     }
 
     async call() : Promise<any> {
         const url: string = 
-            `https://api.openweathermap.org/data/2.5/forecast?lat=${this.lat}&lon=${this.lon}&units=metric&appid=${this.key}`
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${this.lat}&lon=${this.lon}&units=metric&appid=${this.key}&lang=${this.lang}`
         const result = await fetch(url)
         const res  = await result.json()
         const finalRes = {
@@ -37,7 +45,8 @@ export default class WeatherMap /* implements IWheaterApi */ {
             finalRes.forecast.simpleforecast.forecastday.push(
                 {
                     date: element.dt,
-                    icon_url: element.weather[0].icon,
+                    icon_url: `http://openweathermap.org/img/w/${element.weather[0].icon}.png`,
+                    main_condition: element.weather[0].main,
                     conditions: element.weather[0].description,
                     pop: p3h || 0,
                     avehumidity: element.main.humidity,
